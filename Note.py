@@ -6,4 +6,3 @@ class Note(object):
         self.id = id(self.date) # Присваивание уникального ID
         self.body = body # Тело заметки
         self.title = title # Заголовок заметки
-        

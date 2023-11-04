@@ -13,27 +13,33 @@ class Book(object):
                 f.write(f"{note.date}\nID: {note.id}\nTitle: {note.title}\nBody: {note.body}\n\n")
 
     def savingData(self):
-        with open('notes.json', 'r', encoding='utf-8') as f:
-            count = len(f.readlines())
-            with open('notes.json', 'r', encoding='utf-8') as f1:
-                i = 0
-                while i < count:
-                    line = f1.readline()
-                    if line == '\n':
-                        i+=1
-                    else:
-                        save_note = Note("","")
-                        save_note.date = datetime.strptime(line.rstrip('\n'), '%Y-%m-%d %H:%M:%S.%f')
-                        i += 1
-                        save_note.id = int(f1.readline().lstrip('ID: ').rstrip('\n'))
-                        i += 1
-                        save_note.title = f1.readline().lstrip('Title: ').rstrip('\n')
-                        i += 1
-                        save_note.body = f1.readline().lstrip('Body: ').rstrip('\n')
-                        i += 1
-                        self.new_list.append(save_note)
-                self.recordingToFile()        
-               
+        try:
+            with open('notes.json', 'r', encoding='utf-8') as f:
+                count = len(f.readlines())
+                with open('notes.json', 'r', encoding='utf-8') as f1:
+                    i = 0
+                    while i < count:
+                        line = f1.readline()
+                        if line == '\n':
+                            i+=1
+                        else:
+                            save_note = Note("","")
+                            save_note.date = datetime.strptime(line.rstrip('\n'), '%Y-%m-%d %H:%M:%S.%f')
+                            i += 1
+                            save_note.id = int(f1.readline().lstrip('ID: ').rstrip('\n'))
+                            i += 1
+                            save_note.title = f1.readline().lstrip('Title: ').rstrip('\n')
+                            i += 1
+                            save_note.body = f1.readline().lstrip('Body: ').rstrip('\n')
+                            i += 1
+                            self.new_list.append(save_note)
+                    self.recordingToFile()        
+        except:
+            new_file = open('notes.json', 'w', encoding='utf-8')
+            new_file.close
+            print("\nСоздайте вашу первую заметку! :)")
+        else:
+            print("\nДанные загружены...\nСинхронизация завершена...\n")           
                     
                     
 

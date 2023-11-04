@@ -17,6 +17,7 @@ class Start(object):
     
     newText = ("\nВведите новый текст -> ")
     searchId = ("\nВведите ID заметки -> ")
+    searchDate = ("\nВведите дату (в формате ДД-ММ-ГГГГ) для выборки заметок -> ")
     
     def __init__(self):
         self.main = UserOperation()
@@ -46,8 +47,18 @@ class Start(object):
                             newTitle = input(self.newText)
                             self.main.editTitle(searchNote,newTitle)
                             continue
+                        if comand == 2:
+                            newTitle = input(self.newText)
+                            self.main.editBody(searchNote,newTitle)
+                            continue
                         elif comand == 3:
                             flag2 = False
                 else: continue        
+            elif user_input == 4:
+                search_date = input(self.searchDate)
+                self.main.date_search(search_date)
+                continue
+            elif user_input == 5:
+                self.main.allPrintNote()
             if user_input == 7:
                 flag = False    
